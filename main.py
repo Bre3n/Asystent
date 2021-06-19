@@ -1,13 +1,19 @@
 import os
+import random
+import threading
 
 import pyttsx3
 import speech_recognition as sr
-import threading
-import random
+
 import speak
+import settings
 
 r = sr.Recognizer()
-tekst = ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","ccccccccccccccccccccccccccccccccccccccccccccccccccc"]
+tekst = [
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "ccccccccccccccccccccccccccccccccccccccccccccccccccc",
+]
 
 
 def takeCommand():
@@ -29,14 +35,16 @@ def takeCommand():
 
     return query
 
+
 def xd():
-    print('xd')
+    print("xd")
     t = random.choice(tekst)
     x = threading.Thread(target=speak.say, args=(t,))
     x.start()
 
 
 if __name__ == "__main__":
+    settings.create_init()
     clear = lambda: os.system("cls")
     clear()
     speak.welcome()
