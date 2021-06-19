@@ -5,8 +5,8 @@ import threading
 import pyttsx3
 import speech_recognition as sr
 
-import speak
 import settings
+import speak
 
 r = sr.Recognizer()
 tekst = [
@@ -19,40 +19,32 @@ tekst = [
 def takeCommand():
     with sr.Microphone() as source:
 
-        print("Słuchanie...")
+        print("Listening...")
         r.pause_threshold = 1
         audio = r.listen(source)
 
     try:
-        print("Rozpoznawanie...")
+        print("Recognition...")
         query = r.recognize_google(audio, language="pl-pl")
         print(f"Użytkownik powiedział: {query}\n")
 
     except Exception as e:
         print(e)
-        print("Nie można odczytać głosu.")
+        print("Unable to recognize.")
         return "None"
 
     return query
 
 
-def xd():
-    print("xd")
-    t = random.choice(tekst)
-    x = threading.Thread(target=speak.say, args=(t,))
-    x.start()
-
-
 if __name__ == "__main__":
-    settings.create_init()
+    settings.check_file()
     clear = lambda: os.system("cls")
     clear()
     speak.welcome()
 
     while True:
-
         query = takeCommand().lower()
-
         if "siema" in query:
-            x = threading.Thread(target=xd)
+            t = random.choice(tekst)
+            x = threading.Thread(target=speak.say, args=(t,))
             x.start()
