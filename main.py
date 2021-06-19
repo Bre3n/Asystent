@@ -1,3 +1,4 @@
+import json
 import os
 import random
 import threading
@@ -14,6 +15,7 @@ tekst = [
     "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     "ccccccccccccccccccccccccccccccccccccccccccccccccccc",
 ]
+keywords = []
 
 
 def takeCommand():
@@ -25,12 +27,11 @@ def takeCommand():
 
     try:
         print("Recognition...")
-        query = r.recognize_google(audio, language="pl-pl")
-        print(f"Użytkownik powiedział: {query}\n")
+        query = r.recognize_google(audio, language=bufor)
+        print(f"User say: {query}\n")
 
     except Exception as e:
-        print(e)
-        print("Unable to recognize.")
+        print("Unable to recognize.", e)
         return "None"
 
     return query
@@ -41,6 +42,17 @@ if __name__ == "__main__":
     clear = lambda: os.system("cls")
     clear()
     speak.welcome()
+    with open("settings.json") as json_file:
+        data = json.load(json_file)
+        for p in data["settings"]:
+            bufor = p["language"]
+    with open(f"languages/{bufor}.json") as json_file:
+        data = json.load(json_file)
+        a = len(data["keywords"][0])
+        for p in data["keywords"]:
+            for i in range(a):
+                keywords.append(p[f"{i+1}"])
+    print(keywords)
 
     while True:
         query = takeCommand().lower()

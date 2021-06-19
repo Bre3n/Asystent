@@ -1,7 +1,14 @@
 {
+    "keywords": [
+        {
+            "1": "dzieñ dobry",
+            "2": "elo"
+        }
+    ],
     "text": [
         {
-            "greetings": "Dzieñ dobry"
+            "1": "Dzieñ dobry",
+            "2": ""
         }
     ]
 }

@@ -24,9 +24,11 @@ def create_settings():
 
 def create_language():
     text = {}
+    text["keywords"] = []
+    text["keywords"] = [{"1": "dzień dobry", "2": "elo"}]
     text["text"] = []
     text["text"] = [
-        {"greetings": "Dzień dobry"},
+        {"1": "Dzień dobry", "2": ""},
     ]
 
     with open("languages/pl-pl.json", "w") as write_file:
