@@ -2,7 +2,7 @@ import asyncio
 import json
 import os
 import random
-import threading
+import multiprocessing
 from datetime import datetime
 from os import listdir
 from os.path import isfile, join
@@ -31,17 +31,10 @@ def takeCommand(language):
     return query
 
 
-def getThreadByName(name):
-    threads = threading.enumerate()  # Threads list
-    for thread in threads:
-        if thread.name == name:
-            return thread
-
-
 async def change_username(bufor, language):
-    x = threading.Thread(target=speak.say, args=({bufor[0]},))
+    x = multiprocessing.Process(target=speak.say, args=({bufor[0]},))
     x.start()
-    await asyncio.sleep(2)
+    await asyncio.sleep(3)
     query = takeCommand(language)
     settings.create_settings(query, language)
-    x = threading.Thread(target=speak.say, args=(f"{bufor[1]} {query}",)).start()
+    x = multiprocessing.Process(target=speak.say, args=(f"{bufor[1]} {query}",)).start()

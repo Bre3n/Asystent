@@ -1,6 +1,6 @@
 import json
 import os
-import threading
+import multiprocessing
 
 import pyttsx3
 

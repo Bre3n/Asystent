@@ -36,6 +36,7 @@ def create_language(var):
                 "4": "jaka jest godzina",
                 "5": "jaki jest dzisiaj dzień",
                 "6": "ok google",
+                "7": "alexa"
             }
         ]
         text["text"] = []
@@ -46,8 +47,8 @@ def create_language(var):
                 "3": "jasne, powiedz jak mam do ciebie mówić&Miło mi ciebie poznać",
                 "4": "jest godzina",
                 "5": "dzisiaj jest",
-                "6": "hmmm, chyba pomyliłeś asystentów",
-                "7": "alexa",
+                "6": "hmmm, chyba pomyliłeś asystentów&naprawdę?",
+                "7": "hmmm, chyba pomyliłeś asystentów&naprawdę?",
             },
         ]
     elif var == "en-en":
@@ -70,8 +71,8 @@ def create_language(var):
                 "3": "alright, just say your new name&Nice to meet you",
                 "4": "it is",
                 "5": "it is",
-                "6": "hmmm, i think you've got the wrong assistant&really? pff",
-                "7": "hmmm, i think you've got the wrong assistant&really? pff",
+                "6": "hmmm, i think you've got the wrong assistant&really?",
+                "7": "hmmm, i think you've got the wrong assistant&really?",
             },
         ]
     with open(f"languages/{var}.json", "w") as write_file:
