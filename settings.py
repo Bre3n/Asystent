@@ -36,7 +36,9 @@ def create_language(var):
                 "4": "jaka jest godzina",
                 "5": "jaki jest dzisiaj dzień",
                 "6": "ok google",
-                "7": "alexa"
+                "7": "alexa",
+                "8": "włącz spotify",
+                "9": "włącz mapy",
             }
         ]
         text["text"] = []
@@ -49,6 +51,8 @@ def create_language(var):
                 "5": "dzisiaj jest",
                 "6": "hmmm, chyba pomyliłeś asystentów&naprawdę?",
                 "7": "hmmm, chyba pomyliłeś asystentów&naprawdę?",
+                "8": "miłego słuchania&spotify nie jest zainstalowane",
+                "9": "szerokiej drogi!",
             },
         ]
     elif var == "en-en":
@@ -61,6 +65,8 @@ def create_language(var):
                 "5": "what day is today",
                 "6": "ok google",
                 "7": "alexa",
+                "8": "turn on spotify",
+                "9": "turn on maps",
             }
         ]
         text["text"] = []
@@ -73,6 +79,8 @@ def create_language(var):
                 "5": "it is",
                 "6": "hmmm, i think you've got the wrong assistant&really?",
                 "7": "hmmm, i think you've got the wrong assistant&really?",
+                "8": "enjoy listening!&spotify is not installed",
+                "9": "enjoy driving",
             },
         ]
     with open(f"languages/{var}.json", "w") as write_file:

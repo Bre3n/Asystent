@@ -5,3 +5,4 @@ __pycache__/speak.cpython-39.pyc
 settings.json
 languages/en-en.json
 languages/pl-pl.json
+.vscode/launch.json
