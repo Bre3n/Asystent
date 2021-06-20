@@ -1,9 +1,9 @@
 import asyncio
 import datetime
 import json
+import multiprocessing
 import os
 import random
-import threading
 import time
 from os import listdir
 from os.path import isfile, join
@@ -68,12 +68,12 @@ if __name__ == "__main__":
     while True:
         query = takeCommand(language).lower()
         if keywords[0] in query:  # * 1 good morning
-            x = threading.Thread(
+            x = multiprocessing.Process(
                 target=speak.say, args=(f"{text[0]} {username}",)
             ).start()
 
         elif keywords[1] in query:  # * 2 hello
-            x = threading.Thread(target=speak.say, args=({text[1]},)).start()
+            x = multiprocessing.Process(target=speak.say, args=({text[1]},)).start()
 
         elif keywords[2] in query:  # * 3 change username
             words = text[2]
@@ -82,23 +82,24 @@ if __name__ == "__main__":
 
         elif keywords[3] in query:  # * 4 time
             strTime = datetime.datetime.now().strftime("%H:%M")
-            x = threading.Thread(
+            x = multiprocessing.Process(
                 target=speak.say, args=(f"{text[3]}{strTime}",)
             ).start()
 
         elif keywords[4] in query:  # * 5 date
             strTime = datetime.datetime.now().strftime("%d")
-            x = threading.Thread(
+            x = multiprocessing.Process(
                 target=speak.say, args=(f"{text[4]}{strTime}",)
             ).start()
 
         elif keywords[5] in query:  # * 6 ok google
             bufor = text[5].split("&")
-            x = threading.Thread(
-                target=speak.say, args=({random.choice(bufor)},), name="2"
+            x = multiprocessing.Process(
+                target=speak.say, args=({random.choice(bufor)},)
             ).start()
 
         elif keywords[6] in query:  # * 7 alexa
-            x = threading.Thread(
+            bufor = text[6].split("&")
+            x = multiprocessing.Process(
                 target=speak.say, args=({random.choice(bufor)},)
             ).start()
