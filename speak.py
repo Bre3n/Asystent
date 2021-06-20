@@ -1,6 +1,5 @@
 import json
 import os
-import random
 import threading
 
 import pyttsx3

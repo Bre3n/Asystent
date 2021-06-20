@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import json
 import os
 import random
@@ -7,7 +8,6 @@ import time
 from os import listdir
 from os.path import isfile, join
 
-import pyttsx3
 import speech_recognition as sr
 
 import module_main
@@ -67,15 +67,38 @@ if __name__ == "__main__":
 
     while True:
         query = takeCommand(language).lower()
-        if keywords[0] in query:  # * 1
-            x = threading.Thread(target=speak.say, args=(f"{text[0]} {username}",))
-            x.start()
+        if keywords[0] in query:  # * 1 good morning
+            x = threading.Thread(
+                target=speak.say, args=(f"{text[0]} {username}",)
+            ).start()
 
-        elif keywords[1] in query:  # * 2
-            x = threading.Thread(target=speak.say, args=({text[1]},))
-            x.start()
+        elif keywords[1] in query:  # * 2 hello
+            x = threading.Thread(target=speak.say, args=({text[1]},)).start()
 
-        elif keywords[2] in query:  # * 3
+        elif keywords[2] in query:  # * 3 change username
             words = text[2]
             bufor = text[2].split("&")
             asyncio.run(module_main.change_username(bufor, language))
+
+        elif keywords[3] in query:  # * 4 time
+            strTime = datetime.datetime.now().strftime("%H:%M")
+            x = threading.Thread(
+                target=speak.say, args=(f"{text[3]}{strTime}",)
+            ).start()
+
+        elif keywords[4] in query:  # * 5 date
+            strTime = datetime.datetime.now().strftime("%d")
+            x = threading.Thread(
+                target=speak.say, args=(f"{text[4]}{strTime}",)
+            ).start()
+
+        elif keywords[5] in query:  # * 6 ok google
+            bufor = text[5].split("&")
+            x = threading.Thread(
+                target=speak.say, args=({random.choice(bufor)},), name="2"
+            ).start()
+
+        elif keywords[6] in query:  # * 7 alexa
+            x = threading.Thread(
+                target=speak.say, args=({random.choice(bufor)},)
+            ).start()
