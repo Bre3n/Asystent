@@ -5,17 +5,15 @@ import threading
 
 import pyttsx3
 
-text_list = []
+import settings
 
+if os.path.exists("settings.json") == False:
+    settings.check_file()
 with open("settings.json") as json_file:
     data = json.load(json_file)
     for p in data["settings"]:
         lang = p["language"]
         username = p["username"]
-with open(f"languages/{lang}.json") as json_file:
-    data = json.load(json_file)
-    for p in data["text"]:
-        text_list.append(p["1"])
 if lang == "en-en":
     engine = pyttsx3.init("sapi5")
     voices = engine.getProperty("voices")
@@ -25,15 +23,15 @@ elif lang == "pl-pl":
     engine.setProperty("rate", 150)
 
 
-def welcome():
-    engine.say(f"{text_list[0]} {username}")
+def welcome(var):
+    engine.say(f"{var} {username}")
     if engine._inLoop:
         engine.endLoop()
     engine.runAndWait()
 
 
 def say(audio):
-    engine.say(audio)
     if engine._inLoop:
         engine.endLoop()
+    engine.say(audio)
     engine.runAndWait()
