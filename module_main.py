@@ -1,8 +1,8 @@
 import asyncio
 import json
+import multiprocessing
 import os
 import random
-import multiprocessing
 from datetime import datetime
 from os import listdir
 from os.path import isfile, join
@@ -32,9 +32,15 @@ def takeCommand(language):
 
 
 async def change_username(bufor, language):
-    x = multiprocessing.Process(target=speak.say, args=({bufor[0]},))
-    x.start()
-    await asyncio.sleep(3)
-    query = takeCommand(language)
-    settings.create_settings(query, language)
-    x = multiprocessing.Process(target=speak.say, args=(f"{bufor[1]} {query}",)).start()
+    multiprocessing.Process(target=speak.say, args=({bufor[0]},)).start()
+    while True:
+        await asyncio.sleep(3)
+        query = takeCommand(language)
+        if query != "None":
+            settings.create_settings(query, language)
+            multiprocessing.Process(
+                target=speak.say, args=(f"{bufor[1]} {query}. {bufor[2]}",)
+            ).start()
+            return 0
+        else:
+            multiprocessing.Process(target=speak.say, args=(f"{bufor[3]}",)).start()
